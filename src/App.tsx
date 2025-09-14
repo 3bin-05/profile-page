@@ -1,10 +1,23 @@
-import React from 'react';
-import { useAuth } from './hooks/useAuth';
-import { LoginForm } from './components/Auth/LoginForm';
-import { ProfilePage } from './components/Profile/ProfilePage';
+import React, { useEffect } from "react";
+import { useAuth } from "./hooks/useAuth";
+import { LoginForm } from "./components/Auth/LoginForm";
+import { ProfilePage } from "./components/Profile/ProfilePage";
 
 function App() {
   const { user, loading } = useAuth();
+
+  useEffect(() => {
+    window.onerror = function (message, source, lineno, colno, error) {
+      console.error("Global error caught:", {
+        message,
+        source,
+        lineno,
+        colno,
+        error,
+      });
+      return false;
+    };
+  }, []);
 
   if (loading) {
     return (
